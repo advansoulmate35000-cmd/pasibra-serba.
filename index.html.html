@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paskibra SMPN 1 Serang Baru</title>
+
+<style>
+body{
+  margin:0;
+  background:#0b0000;
+  color:#fff;
+  font-family:Arial, Helvetica, sans-serif;
+  padding:14px;
+}
+
+/* HEADER */
+.header{
+  text-align:center;
+  margin-bottom:18px;
+}
+.logos{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  margin-bottom:8px;
+}
+.logos img{
+  width:46px;
+  height:46px;
+  object-fit:contain;
+  padding:6px;
+  border-radius:50%;
+  border:1px solid #d4af37;
+  background:#140000;
+}
+.header h1{
+  margin:6px 0;
+  font-size:26px;
+  letter-spacing:3px;
+  color:#d4af37;
+}
+.header p{
+  font-size:13px;
+  opacity:.9;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+/* CARD */
+.card{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(135deg,#2a0000,#000);
+  border:1px solid #d4af37;
+  border-radius:14px;
+  padding:14px;
+  text-align:center;
+  font-size:12px;
+  font-weight:bold;
+  color:#f6e27f;
+  cursor:pointer;
+}
+.card:active{
+  transform:scale(.96);
+}
+
+/* EFFECT BINTANG */
+.effect{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:8px;
+  height:8px;
+  background:#f6e27f;
+  border-radius:50%;
+  box-shadow:0 0 8px #d4af37;
+  pointer-events:none;
+  animation:fly 0.8s ease-out forwards;
+}
+
+@keyframes fly{
+  from{
+    transform:translate(0,0) scale(1);
+    opacity:1;
+  }
+  to{
+    transform:translate(var(--x),var(--y)) scale(0);
+    opacity:0;
+  }
+}
+
+/* BUTTON */
+.buttons{
+  margin-top:18px;
+  display:grid;
+  gap:10px;
+}
+.btn{
+  background:#d4af37;
+  color:#000;
+  text-align:center;
+  padding:14px;
+  border-radius:25px;
+  font-weight:bold;
+  text-decoration:none;
+  font-size:14px;
+}
+
+/* MODAL */
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  justify-content:center;
+  align-items:center;
+}
+.modal-box{
+  background:#140000;
+  border:1px solid #d4af37;
+  border-radius:18px;
+  padding:20px;
+  width:88%;
+  font-size:13px;
+}
+.modal-box h2{
+  color:#d4af37;
+  margin-top:0;
+}
+.close{
+  margin-top:14px;
+  text-align:center;
+  font-weight:bold;
+  color:#f6e27f;
+  cursor:pointer;
+}
+
+</style>
+</head>
+ 
+<body>
+
+<div class="header">
+  <div class="logos">
+    <img src="c:\Users\muhamad galih\Pictures\Logo SMP.jpg" alt="Logo Sekolah">
+    <img src="c:\Users\muhamad galih\Pictures\Logo Bhirasatya.jpg" alt="Logo Paskibra">
+  </div>
+  <h1>PASKIBRA</h1>
+  <p>SMP Negeri 1 Serang Baru<br>Pasukan Pengibar Bendera</p>
+</div>
+
+<div class="grid">
+  <div class="card" onclick="burst(this);openM('def')">APA ITU<br>PASKIBRA</div>
+  <div class="card" onclick="burst(this);openM('motto')">MOTTO PASKIBRA</div>
+  <div class="card" onclick="burst(this);openM('nilai')">NILAI SEORANG<BR>ANGGOTA PAASKIBRA</div>
+  <div class="card" onclick="burst(this);openM('kegiatan')">KEGIATAN EKSKUL</div>
+  <div class="card" onclick="burst(this);openM('atribut')">PAKAIAN PASKIBRA</div>
+  <div class="card" onclick="burst(this);openM('latihan')">LATIHAN TAMBAHAN</div>
+  <div class="card" onclick="burst(this);openM('mental')">MENTAL SEORANG<BR>ANGGOTA PASKIBRA</div>
+  <div class="card" onclick="burst(this);openM('prestasi')">MENGAJARKAN TUB<BR>Tata Cara Upacara Bendera</div>
+</div>
+
+<div class="buttons">
+  <a class="btn" href="https://whatsapp.com/channel/0029VbByK1tJJhzQ0ClWu604">CHANNEL WHATSAPP</a>
+  <a class="btn" href="https://www.instagram.com/brigpas_bhirasatya?igsh=MTVrNWV4cDlwY3czag==">FOLLOW INSTAGRAM</a>
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal-box" id="box"></div>
+</div>
+
+<script>
+const modal=document.getElementById("modal");
+const box=document.getElementById("box");
+
+const isi={
+def:`<h2>Apa Itu Paskibra</h2><p>Paskibra adalah Pasukan Pengibar Bendera, yaitu kelompok siswa yang bertugas mengibarkan dan menurunkan Bendera Merah Putih pada upacara, terutama saat Hari Kemerdekaan Indonesia (17 Agustus) dan upacara resmi lainnya.</p>`,
+motto:`<h2>Motto PASKIBRA</h2><p>PASKIBRA ITU<BR><BR>TIDAK TAKUT SALAH<BR>TIDAK TAKUT KALAH<BR>TIDAK TAKUT JATUH<BR>TIDAK TAKUT MATI<BR>TAKUT MATI JANGAN HIDUP<BR>TAKUT HIDUP MATI SEKALIAN</p>`,
+nilai:`<h2>Nilai Seorang PASKIBRA</h2><p>Disiplin – Tepat waktu, Patuh aturan, konsisten, Tanggung jawab, Menjalankan tugas dengan sungguh-sungguh<BR>Kerja sama – kompak, solid, saling percaya satu sama lain<BR>Nasionalisme – cinta tanah air dan menghormati bendera 🇮🇩<BR>Kepemimpinan – berani memimpin dan dipimpin<BR>Mental kuat – tidak mudah menyerah, siap menghadapi tekanan<BR>Rasa hormat – sopan, menghargai pelatih, senior, dan sesama<BR>Kejujuran – jujur dalam sikap dan tindakan.</p>`,
+kegiatan:`<h2>Kegiatan Ekskul</h2><p>Apel Pagi dan Apel Siang<br>Latihan rutin PBB<BR>Materi PASKIBRA<BR>Mengajarkan budaya PASKIBRA<BR>dan Kegiatan Ekskul lainya.</p>`,
+atribut:`<h2>Atribut</h2><p>PDL : Pakain Dinas Lapangan<br> PDU : Pakain Dinas Upacara<br> PDH : Pakaian Dinas Harian<br> PSL : Pakaian Seragam Lomba<br> PDB : Pakain Dinas Batik.</p>`,
+latihan:`<h2>Latihan Tambahan</h2><p>Melatih kemampuan PBB serta melatih mental dan fisik seorang anggota PASKIBRA.</p>`,
+mental:`<h2>Mental Anggota PASKIBRA</h2><p>Disiplin tinggi : Datang tepat waktu, seragam rapi, gerakan harus presisi → ngelatih tanggung jawab & konsistensi<BR>Tahan tekanan : Dimarahin pelatih, latihan panas, capek fisik → mental jadi kuat, nggak gampang baper<BR>Percaya diri : Tampil di depan umum, upacara resmi → berani, tegap, nggak grogi.<BR>Fokus & kontrol emosi : Salah dikit bisa kelihatan → dilatih tetap tenang walau tegang.<BR>Pantang menyerah : Gerakan diulang berkali-kali sampai benar → mental pejuang, nggak gampang nyerah.<BR>Solid & loyal tim : Satu salah, semua kena → empati, kebersamaan, rasa memiliki.</p>`,
+prestasi:`<h2>TUB</h2><p>Mau tau caranyaaaa ????<br> GASKEUUUN ATUH JOIN PASKIBRA ADIK-ADIKKK .`,
+};
+
+function openM(k){
+  box.innerHTML = isi[k] + `<div class="close" onclick="closeM()">TUTUP</div>`;
+  modal.style.display="flex";
+}
+function closeM(){
+  modal.style.display="none";
+}
+
+/* ANIMASI BINTANG */
+function burst(el){
+  for(let i=0;i<14;i++){
+    const s=document.createElement("span");
+    s.className="effect";
+    s.style.setProperty("--x",(Math.random()*160-80)+"px");
+    s.style.setProperty("--y",(Math.random()*160-80)+"px");
+    el.appendChild(s);
+    setTimeout(()=>s.remove(),800);
+  }
+}
+</script>
+
+</body>
+</html>
